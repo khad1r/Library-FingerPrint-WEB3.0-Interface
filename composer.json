@@ -3,7 +3,7 @@
   "description": "api web scraper for zteco web3.0 interface",
   "type": "library",
   "license": "GPL-3.0-or-later",
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
