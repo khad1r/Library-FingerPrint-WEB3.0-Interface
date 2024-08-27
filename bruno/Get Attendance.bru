@@ -1,0 +1,25 @@
+meta {
+  name: Get Attendance
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{Host}}/form/Download
+  body: text
+  auth: none
+}
+
+headers {
+  Cookie: SessionID={{SessionID}}
+}
+
+body:text {
+  sdate=2024-08-01&edate=2024-08-31&uid=0=0&uid=1=1&uid=2=2&uid=3=3&uid=4=4&uid=5=5&uid=6=6&uid=7=7&uid=8=8&uid=9=9&uid=10=10&uid=11=11&uid=12=12&uid=13=13&uid=14=14&uid=15=15&uid=16=16&uid=17=17&uid=18=18&uid=19=19&uid=20=20&uid=21=21&uid=22=22&uid=23=23&uid=24=24&uid=25=25
+}
+
+body:form-urlencoded {
+  sdate: 2024-08-01
+  edate: 2024-08-31
+  uid: 1,2,3,4,5,6,63,7,8,9,10,11,64,12,13,14,15,16,17,65
+}

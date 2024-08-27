@@ -1,0 +1,31 @@
+meta {
+  name: 1. Get SessionID
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{Host}}
+  body: none
+  auth: none
+}
+
+script:post-response {
+  // Check if the Set-Cookie header exists and is an array
+  let setCookieHeader = res.headers['set-cookie'];
+  
+  if (Array.isArray(setCookieHeader) && setCookieHeader.length > 0) {
+      let cookie = setCookieHeader[0];  // Access the first cookie
+      let sessionIdMatch = cookie.match(/SessionID=([^;]+)/);  // Extract the SessionID
+      if (sessionIdMatch) {
+          let sessionId = sessionIdMatch[1];  // Get the session ID value
+          bru.setVar("SessionID", sessionId);  // Set the variable in BRU
+         console.log(bru.getVar("SessionID"))
+      } else {
+          console.error("SessionID not found in Set-Cookie header.");
+      }
+  } else {
+      console.error("Set-Cookie header is not available or not in the expected format.");
+  }
+  
+}

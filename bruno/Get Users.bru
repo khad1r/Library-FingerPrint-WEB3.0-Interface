@@ -1,0 +1,30 @@
+meta {
+  name: Get Users
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{Host}}/csl/user?last=100
+  body: none
+  auth: none
+}
+
+params:query {
+  last: 100
+  ~first: 0
+}
+
+headers {
+  Cookie: SessionID={{SessionID}}
+}
+
+body:text {
+  sdate=2024-08-26&edate=2024-08-26&period=1&uid=12&uid=4&uid=5&uid=6&uid=9&uid=11&uid=13&uid=14&uid=15&uid=16
+}
+
+body:form-urlencoded {
+  sdate: 2024-08-01
+  edate: 2024-08-31
+  uid: 1,2,3,4,5,6,63,7,8,9,10,11,64,12,13,14,15,16,17,65
+}

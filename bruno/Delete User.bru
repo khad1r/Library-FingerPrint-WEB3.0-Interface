@@ -1,0 +1,29 @@
+meta {
+  name: Delete User
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{Host}}/csl/user?action=del
+  body: formUrlEncoded
+  auth: none
+}
+
+params:query {
+  action: del
+}
+
+headers {
+  Cookie: SessionID={{SessionID}}
+}
+
+body:form-urlencoded {
+  uid: 77
+}
+
+tests {
+  test("should be able to login", function() {
+      expect(res.status).to.equal(200);
+    });
+}

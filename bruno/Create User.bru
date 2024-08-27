@@ -1,0 +1,29 @@
+meta {
+  name: Create User
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{Host}}/csl/user?action=save&id=add
+  body: formUrlEncoded
+  auth: none
+}
+
+params:query {
+  action: save
+  id: add
+}
+
+headers {
+  Cookie: SessionID={{SessionID}}
+}
+
+body:form-urlencoded {
+  upin: NULL
+  upin2: 1000001
+  uname: tesuser
+  uprivilege: 0
+  upwd: 123123
+  ucard: 0
+}

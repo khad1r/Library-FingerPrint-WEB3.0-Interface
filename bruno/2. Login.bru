@@ -1,0 +1,25 @@
+meta {
+  name: 2. Login
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{Host}}/csl/check
+  body: text
+  auth: none
+}
+
+headers {
+  cookie: SessionID={{SessionID}}
+}
+
+body:text {
+  username={{user}}&userpwd={{pass}}
+}
+
+tests {
+  test("should be able to login", function() {
+      expect(res.status).to.equal(200);
+    });
+}

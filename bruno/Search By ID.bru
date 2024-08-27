@@ -1,0 +1,19 @@
+meta {
+  name: Search By ID
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{Host}}/csl/user?uid=1000001
+  body: none
+  auth: none
+}
+
+params:query {
+  uid: 1000001
+}
+
+headers {
+  Cookie: SessionID={{SessionID}}
+}

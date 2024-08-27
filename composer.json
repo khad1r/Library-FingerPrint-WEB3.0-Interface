@@ -1,0 +1,20 @@
+{
+  "name": "khad1r/webfingerprint",
+  "description": "api web scraper for zteco web3.0 interface",
+  "type": "library",
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "khad1r\\webfingerprint\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Kadir",
+      "email": "me@khadr.dev"
+    }
+  ],
+  "require": {}
+}
