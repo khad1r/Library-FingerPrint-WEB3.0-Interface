@@ -2,7 +2,7 @@
   "name": "khad1r/webfingerprint",
   "description": "api web scraper for zteco web3.0 interface",
   "type": "library",
-  "license": "GNU GENERAL PUBLIC LICENSE",
+  "license": "GPL-3.0-or-later",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "autoload": {
