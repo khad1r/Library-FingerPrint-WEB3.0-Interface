@@ -26,8 +26,9 @@ class ZtecoWeb3Api
         $this->url = $url;
         $this->username = $username;
         $this->password = $password;
-        $this->getSessionId();
-        // usleep(50000); // Sleep for 10 milliseconds
+        if (!$this->getSessionId()) {
+            throw new \Exception("Unable to connect to the attendance machine");
+        }
         if (!$this->login()) {
             throw new \Exception("Unable to login to the attendance machine");
         }
@@ -43,9 +44,9 @@ class ZtecoWeb3Api
         return [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
+            CURLOPT_MAXREDIRS => 3,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_TIMEOUT => $options[CURLOPT_TIMEOUT] ?? 30,
             CURLOPT_CUSTOMREQUEST => $options[CURLOPT_CUSTOMREQUEST] ?? 'GET',
             CURLOPT_HTTPHEADER => $options[CURLOPT_HTTPHEADER] ?? [
                 "content-type: text/plain",
@@ -187,6 +188,7 @@ class ZtecoWeb3Api
             CURLOPT_URL => $this->url,
             CURLOPT_HEADER => true,
             CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_TIMEOUT => 3,
             CURLOPT_HTTPHEADER => []
         ])->executeCurl();
 
@@ -196,7 +198,7 @@ class ZtecoWeb3Api
         if ($header && preg_match('/SessionID=([^;]+)/', $header, $sessionIdMatch)) {
             $this->sessionId = $sessionIdMatch[1];
         }
-        return $this;
+        return !$this->curlError;
     }
 
     /**
@@ -214,6 +216,7 @@ class ZtecoWeb3Api
         $this->prepareCurl([
             CURLOPT_URL => "{$this->url}/csl/check",
             CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_TIMEOUT => 3,
             CURLOPT_POSTFIELDS => $curlBody,
         ])->executeCurl();
         return (!$this->curlError && (self::VALIDLOGINRESP == preg_replace('/\s+/', '', $this->curlResponse)));
