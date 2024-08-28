@@ -27,10 +27,10 @@ class ZtecoWeb3Api
         $this->username = $username;
         $this->password = $password;
         if (!$this->getSessionId()) {
-            throw new \Exception("Unable to connect to the attendance machine");
+            throw new \Exception("Unable to connect to the attendance machine at $url");
         }
         if (!$this->login()) {
-            throw new \Exception("Unable to login to the attendance machine");
+            throw new \Exception("Unable to login to the attendance machine at $url");
         }
     }
 
